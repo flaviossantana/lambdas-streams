@@ -16,39 +16,9 @@ public class OrdeanarStrings {
         palavras.add("barco");
         palavras.add("flavio santana");
 
-        Comparator<String> comparador = new ComparadorPorTamnho();
-        Collections.sort(palavras, comparador);
+        palavras.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
         System.out.println(palavras);
-
-        for (String palavra : palavras) {
-            System.out.println(palavra);
-        }
-
-        palavras.sort(comparador);
-        System.out.println(palavras);
-
-        Consumer<String> consumidor = new ConsumidorDeString();
-        palavras.forEach(consumidor);
+        palavras.forEach((palavra) -> System.out.println(palavra));
 
     }
 }
-
-class ConsumidorDeString implements Consumer<String> {
-    public void accept(String s) {
-        System.out.println(s);
-    }
-}
-
-class ComparadorPorTamnho implements Comparator<String> {
-    @Override
-    public int compare(String s1, String s2) {
-        if (s1.length() < s2.length()) {
-            return -1;
-        }
-        if (s1.length() > s2.length()) {
-            return 1;
-        }
-        return 0;
-    }
-}
-

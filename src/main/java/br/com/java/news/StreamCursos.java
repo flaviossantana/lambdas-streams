@@ -95,6 +95,16 @@ public class StreamCursos {
                 ))
                 .forEach((n, a) -> System.out.println(String.format("%s tem %s alunos ", n, a)));
 
+        cusros.stream()
+                .mapToDouble(Curso::getAlunos)
+                .max()
+                .ifPresent(System.out::println);
+
+        cusros.stream()
+                .filter(c -> c.getAlunos() > 50)
+                .findFirst()
+                .ifPresent(System.out::println);
+
     }
 
 

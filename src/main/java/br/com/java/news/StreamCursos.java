@@ -3,6 +3,8 @@ package br.com.java.news;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Curso {
@@ -69,7 +71,29 @@ public class StreamCursos {
 
         Stream<String> stringStream = cusros.stream().map(Curso::getNome);
 
+        cusros.stream()
+                .filter(c -> c.getAlunos() > 10)
+                .findAny()
+                .ifPresent(c -> System.out.println(c.getNome()));
 
+        cusros.stream()
+                .mapToInt(Curso::getAlunos)
+                .average()
+                .ifPresent(System.out::println);
+
+        cusros.stream()
+                .filter(c -> c.getAlunos() > 189)
+                .collect(Collectors.toList())
+                .stream()
+                .forEach(System.out::println);
+
+        cusros.stream()
+                .filter(c -> c.getAlunos() > 1)
+                .collect(Collectors.toMap(
+                   c -> c.getNome(),
+                   c -> c.getAlunos()
+                ))
+                .forEach((n, a) -> System.out.println(String.format("%s tem %s alunos ", n, a)));
 
     }
 
